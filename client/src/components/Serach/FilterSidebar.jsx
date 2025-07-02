@@ -24,7 +24,7 @@ const FilterSidebar = ({ applyFilters }) => {
     applyFilters(filters);
   };
 
-  rreturn (
+  return (
   <div className="p-4 space-y-6 w-full sm:w-[14rem] mt-6 sm:mt-[5rem]">
     {/* Budget Filter */}
     <div className="p-4 border rounded-md bg-white shadow-sm">
