@@ -106,158 +106,162 @@ const CreatePost = () => {
     }
   };
 
-  return (
-    <div className="flex justify-between text-black">
-      <div className="ml-[4rem]">
-        <Navbar />
-      </div>
-      <div className="flex flex-col p-8 w-[81%]">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">Create Post</h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-[81%] p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Hotel Location"
-            value={hotelLocation}
-            onChange={(e) => setHotelLocation(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Facilities"
-            value={facilities}
-            onChange={(e) => setFacilities(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="number"
-            placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Nearby Area"
-            value={nearArea}
-            onChange={(e) => setNearArea(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-
-          <div className="mb-4">
-            <label
-              htmlFor="category"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Category
-            </label>
-            <select
-              name="category"
-              id="category"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-[81%] bg-white text-black border border-gray-300 p-2 rounded-md focus:outline-none focus:ring focus:border-blue-500"
-            >
-              <option value="">Select a category</option>
-              {category?.map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="guest"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Guests
-            </label>
-            <select
-              id="guest"
-              value={guest}
-              onChange={(e) => setGuest(e.target.value)}
-              className="w-[81%] bg-white border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
-            >
-              {[...Array(6)].map((_, i) => (
-                <option key={i} value={i + 1}>
-                  {i + 1}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label
-              htmlFor="isAvailable"
-              className="block text-gray-700 text-sm font-bold mb-2"
-            >
-              Availability
-            </label>
-            <select
-              id="isAvailable"
-              value={isAvailable}
-              onChange={(e) =>
-                setIsAvailable(e.target.value === "true" ? true : false)
-              }
-              className="w-[81%] bg-white border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
-            >
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
-          </div>
-
-          <div className="w-[81%] p-3 border border-gray-300 rounded">
-            <label className="flex items-center cursor-pointer">
-              <FaImage className="mr-2 text-gray-600" />
-              <span>Upload Images (max 3)</span>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
-            <div className="flex space-x-4 mt-2">
-              {images.map((file, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt={`Preview ${index + 1}`}
-                  className="w-24 h-24 object-cover rounded"
-                />
-              ))}
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="w-[81%] bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition duration-300"
-          >
-            Submit Post
-          </button>
-        </form>
-      </div>
+return (
+  <div className="flex flex-col lg:flex-row bg-gray-50 min-h-screen">
+    {/* Sidebar */}
+    <div className="w-full lg:w-[250px] border-r border-gray-200">
+      <Navbar />
     </div>
-  );
+
+    {/* Form Section */}
+    <div className="flex-1 p-4 sm:p-6">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">📝 Create Post</h1>
+
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-5 max-w-3xl w-full mx-auto bg-white p-6 rounded-lg shadow-md"
+      >
+        {/* Title */}
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+
+        {/* Location */}
+        <input
+          type="text"
+          placeholder="Hotel Location"
+          value={hotelLocation}
+          onChange={(e) => setHotelLocation(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+
+        {/* Description */}
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+
+        {/* Facilities */}
+        <input
+          type="text"
+          placeholder="Facilities (comma separated)"
+          value={facilities}
+          onChange={(e) => setFacilities(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        {/* Price */}
+        <input
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+
+        {/* Near Area */}
+        <input
+          type="text"
+          placeholder="Nearby Area"
+          value={nearArea}
+          onChange={(e) => setNearArea(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        {/* Category */}
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">Category</label>
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select a category</option>
+            {category?.map((item) => (
+              <option key={item._id} value={item._id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Guests */}
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">Guests</label>
+          <select
+            value={guest}
+            onChange={(e) => setGuest(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {[...Array(6)].map((_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Availability */}
+        <div>
+          <label className="block text-gray-700 font-semibold mb-1">Availability</label>
+          <select
+            value={isAvailable}
+            onChange={(e) => setIsAvailable(e.target.value === "true")}
+            className="w-full p-3 border border-gray-300 rounded bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+
+        {/* Image Upload */}
+        <div className="border border-gray-300 p-4 rounded">
+          <label className="flex items-center cursor-pointer text-gray-700 font-semibold">
+            <FaImage className="mr-2 text-gray-500" />
+            Upload Images (max 3)
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
+          <div className="flex mt-3 gap-3 flex-wrap">
+            {images.map((file, index) => (
+              <img
+                key={index}
+                src={URL.createObjectURL(file)}
+                alt={`Preview ${index + 1}`}
+                className="w-24 h-24 object-cover rounded border"
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white font-semibold py-3 rounded hover:bg-blue-700 transition duration-300"
+        >
+          Submit Post
+        </button>
+      </form>
+    </div>
+  </div>
+);
+
+
 };
 
 export default CreatePost;

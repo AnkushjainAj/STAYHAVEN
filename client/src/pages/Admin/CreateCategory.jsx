@@ -71,48 +71,59 @@ const CreateCategory = () => {
     setCategoryName(name);
   };
 
-  return (
-    <div className="flex ml-16 mt-4">
-      <Navbar />
-      <div className="flex flex-col items-center p-4 w-full max-w-3xl">
-        <h1 className="text-2xl font-bold mb-4">Create Category</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center gap-2 mb-4 w-full max-w-md"
+ return (
+  <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
+    <Navbar />
+    
+    <div className="flex flex-col items-center p-6 w-full max-w-3xl mx-auto">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+        📂 Manage Categories
+      </h1>
+
+      {/* Form Section */}
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-md bg-white p-4 shadow rounded-md mb-8"
+      >
+        <input
+          type="text"
+          placeholder="Enter Category Name"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
+          className="flex-1 border border-gray-300 rounded px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded transition"
         >
-          <input
-            type="text"
-            placeholder="Category Name"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
-            className="border px-2 py-1 w-full max-w-sm bg-white"
-          />
-          <button
-            type="submit"
-            className="px-4 py-1 bg-blue-500 text-white ml-2"
-          >
-            {editId ? "Update" : "Submit"}
-          </button>
-        </form>
-        <div className="w-full max-w-md">
-          <h2 className="text-xl font-semibold mb-2">Categories</h2>
-          <ul className="border border-gray-300 p-4">
+          {editId ? "Update" : "Submit"}
+        </button>
+      </form>
+
+      {/* List Section */}
+      <div className="w-full max-w-md">
+        <h2 className="text-xl font-semibold mb-4 text-gray-700">📋 Categories</h2>
+        {categories.length === 0 ? (
+          <p className="text-gray-500 text-sm">No categories yet.</p>
+        ) : (
+          <ul className="bg-white shadow rounded-md divide-y divide-gray-200">
             {categories.map((category) => (
               <li
                 key={category._id}
-                className="flex justify-between items-center p-1 border-b last:border-b-0"
+                className="flex justify-between items-center p-3"
               >
-                <span className="flex-grow">{category.name}</span>
+                <span className="text-gray-800">{category.name}</span>
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(category._id, category.name)}
-                    className="px-2 py-1 bg-yellow-500 text-white"
+                    className="bg-yellow-400 hover:bg-yellow-500 text-white text-sm px-3 py-1 rounded"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(category._id)}
-                    className="px-2 py-1 bg-red-500 text-white"
+                    className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded"
                   >
                     Delete
                   </button>
@@ -120,10 +131,12 @@ const CreateCategory = () => {
               </li>
             ))}
           </ul>
-        </div>
+        )}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default CreateCategory;

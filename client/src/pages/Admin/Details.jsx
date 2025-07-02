@@ -11,12 +11,13 @@ const Details = () => {
     email: auth?.user?.email,
   };
 
-  return (
-    <div className="flex flex-row ml-16">
-      <Navbar />
-      <div className="p-8 bg-gray-50 mx-8 h-full flex flex-col justify-center">
-        <h2 className="text-2xl font-semibold mb-6 text-gray-800">
-          User Details
+ return (
+  <div className="flex bg-gray-50 min-h-screen">
+    <Navbar />
+    <div className="flex-1 flex items-center justify-center p-8">
+      <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">
+          👤 User Details
         </h2>
 
         <div className="flex items-center text-gray-800 mb-4">
@@ -34,7 +35,9 @@ const Details = () => {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Details;

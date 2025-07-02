@@ -118,10 +118,12 @@ const handleUpdate = async (reviewId) => {
     }
   };
 
-  return (
-    <div className="flex flex-wrap gap-6 p-6 ml-12">
+ return (
+  <div className="px-4 py-8">
+    {/* Coupon + Related Products */}
+    <div className="flex flex-wrap gap-6 justify-center md:justify-start">
       {/* Coupon Card */}
-      <div className="flex flex-col items-center bg-blue-500 text-white p-6 rounded-lg shadow-lg w-[19rem]">
+      <div className="flex flex-col items-center bg-blue-500 text-white p-6 rounded-lg shadow-lg w-full sm:w-[20rem]">
         <div className="flex items-center mb-4">
           <FaPlaneDeparture className="text-3xl mr-2" />
           <h3 className="text-2xl font-bold">my Dream Place</h3>
@@ -137,8 +139,8 @@ const handleUpdate = async (reviewId) => {
       {/* Related Products */}
       {relatedProducts.map((related, index) => (
         <div
-          className="bg-white shadow-md rounded-lg overflow-hidden w-[27rem]"
           key={related._id || index}
+          className="bg-white shadow-md rounded-lg overflow-hidden w-full sm:w-[21rem]"
         >
           <img
             src={related.images[0]}
@@ -165,156 +167,157 @@ const handleUpdate = async (reviewId) => {
           </div>
         </div>
       ))}
+    </div>
 
-      {/* Review Section */}
-      <div className="w-full mt-10 max-w-4xl">
-        <h2 className="text-3xl font-bold text-blue-800 mb-4">Write a Review</h2>
+    {/* Review Form Section */}
+    <div className="w-full mt-10 px-4 max-w-4xl mx-auto">
+      <h2 className="text-3xl font-bold text-blue-800 mb-4">Write a Review</h2>
 
-       <form
-  onSubmit={handleSubmit}
-  className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-lg space-y-6"
->
-  <h2 className="text-2xl font-semibold text-gray-800 text-center">
-    Submit a Review
-  </h2>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg space-y-6"
+      >
+        <h2 className="text-2xl font-semibold text-gray-800 text-center">
+          Submit a Review
+        </h2>
 
-  <div>
-    <label className="block text-gray-600 mb-1">Your Name</label>
-    <input
-      type="text"
-      placeholder="Enter your name"
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-      required
-    />
-  </div>
+        <div>
+          <label className="block text-gray-600 mb-1">Your Name</label>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
 
-  <div>
-    <label className="block text-gray-600 mb-1">Your Comment</label>
-    <textarea
-      placeholder="Write your feedback..."
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none h-24 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-      value={comment}
-      onChange={(e) => setComment(e.target.value)}
-      required
-    />
-  </div>
+        <div>
+          <label className="block text-gray-600 mb-1">Your Comment</label>
+          <textarea
+            placeholder="Write your feedback..."
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none h-24 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            required
+          />
+        </div>
 
-  <div>
-    <label className="block text-gray-600 mb-1">Rating</label>
-    <select
-      value={rating}
-      onChange={(e) => setRating(Number(e.target.value))}
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-    >
-      <option value={1}>⭐ 1 - Poor</option>
-      <option value={2}>⭐⭐ 2 - Fair</option>
-      <option value={3}>⭐⭐⭐ 3 - Good</option>
-      <option value={4}>⭐⭐⭐⭐ 4 - Very Good</option>
-      <option value={5}>⭐⭐⭐⭐⭐ 5 - Excellent</option>
-    </select>
-  </div>
+        <div>
+          <label className="block text-gray-600 mb-1">Rating</label>
+          <select
+            value={rating}
+            onChange={(e) => setRating(Number(e.target.value))}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          >
+            <option value={1}>⭐ 1 - Poor</option>
+            <option value={2}>⭐⭐ 2 - Fair</option>
+            <option value={3}>⭐⭐⭐ 3 - Good</option>
+            <option value={4}>⭐⭐⭐⭐ 4 - Very Good</option>
+            <option value={5}>⭐⭐⭐⭐⭐ 5 - Excellent</option>
+          </select>
+        </div>
 
-  <button
-    type="submit"
-    className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300"
-  >
-    Submit Review
-  </button>
-</form>
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+        >
+          Submit Review
+        </button>
+      </form>
 
+      {/* Reviews List */}
+      <div className="mt-8">
+        <h3 className="text-2xl font-semibold mb-4 text-gray-800">
+          User Reviews (Avg: ⭐ {averageRating}/5)
+        </h3>
+        {reviews.length === 0 ? (
+          <p className="text-gray-500">No reviews yet.</p>
+        ) : (
+          <div className="space-y-4">
+            {reviews.map((review) => (
+              <div
+                key={review._id}
+                className="bg-white border border-gray-200 p-4 rounded-lg shadow"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <strong>{review.username}</strong>
+                  <span className="text-yellow-500 font-bold">
+                    ⭐ {review.rating}/5
+                  </span>
+                </div>
 
-        {/* Reviews */}
-        <div className="mt-8">
-          <h3 className="text-2xl font-semibold mb-4 text-gray-800">
-            User Reviews (Avg: ⭐ {averageRating}/5)
-          </h3>
-          {reviews.length === 0 ? (
-            <p className="text-gray-500">No reviews yet.</p>
-          ) : (
-            <div className="space-y-4">
-              {reviews.map((review) => (
-                <div
-                  key={review._id}
-                  className="bg-white border border-gray-200 p-4 rounded-lg shadow"
-                >
-                  <div className="flex justify-between items-center mb-2">
-                    <strong>{review.username}</strong>
-                    <span className="text-yellow-500 font-bold">
-                      ⭐ {review.rating}/5
-                    </span>
-                  </div>
-
-                  {edit === review._id ? (
-                    <>
-                      <textarea
-                        className="w-full p-2 border bo-300 rounded mb-2"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                      />
-                      <select
-                        value={rating}
-                        onChange={(e) => setRating(Number(e.target.value))}
-                        className="w-full p-2 border border-gray-300 rounded mb-2"
+                {edit === review._id ? (
+                  <>
+                    <textarea
+                      className="w-full p-2 border border-gray-300 rounded mb-2"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    />
+                    <select
+                      value={rating}
+                      onChange={(e) => setRating(Number(e.target.value))}
+                      className="w-full p-2 border border-gray-300 rounded mb-2"
+                    >
+                      <option value={1}>⭐ 1</option>
+                      <option value={2}>⭐⭐ 2</option>
+                      <option value={3}>⭐⭐⭐ 3</option>
+                      <option value={4}>⭐⭐⭐⭐ 4</option>
+                      <option value={5}>⭐⭐⭐⭐⭐ 5</option>
+                    </select>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleUpdate(review._id)}
+                        className="bg-green-500 text-white px-3 py-1 rounded"
                       >
-                        <option value={1}>⭐ 1</option>
-                        <option value={2}>⭐⭐ 2</option>
-                        <option value={3}>⭐⭐⭐ 3</option>
-                        <option value={4}>⭐⭐⭐⭐ 4</option>
-                        <option value={5}>⭐⭐⭐⭐⭐ 5</option>
-                      </select>
-                      <div className="flex gap-2">
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEdit("")}
+                        className="bg-gray-400 text-white px-3 py-1 rounded"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-gray-700">{review.comment}</p>
+                    <small className="text-gray-400 block mb-2">
+                      {new Date(review.date).toLocaleString()}
+                    </small>
+                    {review.userEmail === userEmail && (
+                      <div className="flex gap-4">
                         <button
-                          onClick={() => handleUpdate(review._id)}
-                          className="bg-green-500 text-white px-3 py-1 rounded"
+                          className="text-blue-600 underline"
+                          onClick={() => {
+                            setEdit(review._id);
+                            setComment(review.comment);
+                            setRating(review.rating);
+                          }}
                         >
-                          Save
+                          Edit
                         </button>
                         <button
-                          onClick={() => setEdit("")}
-                          className="bg-gray-400 text-white px-3 py-1 rounded"
+                          className="text-red-600 underline"
+                          onClick={() => handleDelete(review._id)}
                         >
-                          Cancel
+                          Delete
                         </button>
                       </div>
-                    </>
-                  ) : (
-                    <>
-                      <p className="text-gray-700">{review.comment}</p>
-                      <small className="text-gray-400 block mb-2">
-                        {new Date(review.date).toLocaleString()}
-                      </small>
-                      {review.userEmail === userEmail && (
-                        <div className="flex gap-4">
-                          <button
-                            className="text-blue-600 underline"
-                            onClick={() => {
-                              setEdit(review._id);
-                              setComment(review.comment);
-                              setRating(review.rating);
-                            }}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="text-red-600 underline"
-                            onClick={() => handleDelete(review._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default RelatedProduct;

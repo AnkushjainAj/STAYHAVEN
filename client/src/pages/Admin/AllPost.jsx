@@ -48,68 +48,76 @@ const AllPost = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="flex min-h-screen bg-[#f4f6f9]">
-      <Navbar />
-      <div className="flex-1 p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          📋 Your All Posts
-        </h1>
+ return (
+  <div className="flex flex-col lg:flex-row min-h-screen bg-[#f4f6f9]">
+    <Navbar />
 
-        {posts.length === 0 ? (
-          <p className="text-center text-gray-500 text-xl">No posts found.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <div
-                key={post._id}
-                className="bg-white relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-1"
-              >
-                <img
-                  src={
-                    post.images?.[currentImageIndex] ||
-                    "https://via.placeholder.com/300x200?text=No+Image"
-                  }
-                  alt="Hotel"
-                  className="h-48 w-full object-cover"
-                />
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-gray-800 truncate">
-                    📍 {post.hotelLocation}
-                  </h3>
-                  <p
+    <div className="flex-1 p-4 sm:p-6 lg:p-10">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center">
+        📋 Your All Posts
+      </h1>
+
+      {posts.length === 0 ? (
+        <p className="text-center text-gray-500 text-lg sm:text-xl">
+          No posts found.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+          {posts.map((post) => (
+            <div
+              key={post._id}
+              className="bg-white relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group transform hover:-translate-y-1"
+            >
+              {/* Post Image */}
+              <img
+                src={
+                  post.images?.[currentImageIndex] ||
+                  "https://via.placeholder.com/300x200?text=No+Image"
+                }
+                alt="Hotel"
+                className="h-48 w-full object-cover"
+              />
+
+              {/* Post Info */}
+              <div className="p-5">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 truncate">
+                  📍 {post.hotelLocation}
+                </h3>
+                <p
+                  onClick={() => navigate(`/admin/post/${post.slug}`)}
+                  className="text-gray-600 mt-1 mb-4 hover:underline cursor-pointer"
+                >
+                  {post.title}
+                </p>
+
+                <div className="flex justify-between items-center mt-4">
+                  <button
                     onClick={() => navigate(`/admin/post/${post.slug}`)}
-                    className="text-gray-600 mt-1 mb-4 hover:underline cursor-pointer"
+                    className="text-blue-600 hover:underline font-medium text-sm"
                   >
-                    {post.title}
-                  </p>
+                    View Post
+                  </button>
 
-                  <div className="flex justify-between items-center mt-4">
-                    <button
-                      onClick={() => navigate(`/admin/post/${post.slug}`)}
-                      className="text-blue-600 hover:underline font-medium"
-                    >
-                      View Post
-                    </button>
-
-                    <button
-                      onClick={() => handleDelete(post._id)}
-                      className="flex items-center gap-2 text-red-600 hover:text-red-700 transition text-sm font-medium"
-                    >
-                      <FaTrash />
-                      Delete
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => handleDelete(post._id)}
+                    className="flex items-center gap-1 text-red-600 hover:text-red-700 text-sm font-medium transition"
+                  >
+                    <FaTrash size={14} />
+                    Delete
+                  </button>
                 </div>
-
-                <div className="absolute top-0 left-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-1 w-full animate-pulse" />
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+
+              {/* Animated Top Border */}
+              <div className="absolute top-0 left-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 h-1 w-full animate-pulse" />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default AllPost;

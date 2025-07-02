@@ -17,39 +17,50 @@ const AllTrip = () => {
     getAllTrip();
   }, []);
 
-  return (
-    <div className="flex p-4">
-      <Navbar />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 w-full ml-8">
+return (
+  <div className="flex flex-col lg:flex-row p-4 bg-gray-50 min-h-screen">
+    <Navbar />
+
+    <div className="flex-1 px-2 sm:px-6 lg:px-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mt-4 mb-6 text-center lg:text-left">
+        All Bookings
+      </h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
         {bookingList.map((booking) => (
           <div
             key={booking._id}
-            className="max-w-sm rounded overflow-hidden shadow-lg bg-white border border-gray-200"
+            className="w-full bg-white rounded-lg shadow-md border border-gray-200"
           >
-            <div className="p-4">
-              <h2 className="text-xl font-semibold text-gray-800">
-                {booking.post.title}
+            <div className="p-5">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
+                🏨 {booking.post.title}
               </h2>
-              <p className="text-gray-600 text-sm mt-2">
+
+              <p className="text-gray-600 text-sm mb-1">
                 <FaRegCalendarAlt className="inline-block mr-2" />
                 {new Date(booking.bookingDate).toLocaleDateString()}
               </p>
-              <p className="text-gray-600 text-sm mt-2">
+
+              <p className="text-gray-600 text-sm mb-1">
                 <FaRegMoneyBillAlt className="inline-block mr-2" />
-                Payment Status: {booking.paymentStatus}
+                Payment Status:{" "}
+                <span className="font-medium capitalize">{booking.paymentStatus}</span>
               </p>
-              <p className="text-gray-600 text-sm mt-2">
+
+              <p className="text-gray-600 text-sm mb-1">
                 <FaUserAlt className="inline-block mr-2" />
                 User: {booking.user.name}
               </p>
-              <p className="text-gray-600 text-sm mt-2">
+
+              <p className="text-sm font-medium mt-2">
                 Status:{" "}
                 <span
                   className={`${
                     booking.status === "pending"
                       ? "text-yellow-500"
-                      : "text-green-500"
-                  } font-bold`}
+                      : "text-green-600"
+                  }`}
                 >
                   {booking.status}
                 </span>
@@ -59,7 +70,9 @@ const AllTrip = () => {
         ))}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default AllTrip;

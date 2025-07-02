@@ -115,140 +115,155 @@ const UpdatePost = () => {
     }
   };
 
-  return (
-    <div className="flex justify-between text-black">
-      <div className="ml-[4rem]">
-        <Navbar />
-      </div>
-      <div className="flex flex-col p-8 w-[81%]">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">
-          Update Your Post
-        </h1>
-        <form className="space-y-4" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-[81%] p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Hotel Location"
-            value={hotelLocation}
-            onChange={(e) => setHotelLocation(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Facilities"
-            value={facilities}
-            onChange={(e) => setFacilities(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <input
-            type="number"
-            placeholder="Price"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Nearby Area"
-            value={nearArea}
-            onChange={(e) => setNearArea(e.target.value)}
-            className="w-[81%] bg-white p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-          />
-          <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-[81%] bg-white border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select a category</option>
-            {Array.isArray(categories) &&
-              categories.map((item) => (
-                <option key={item._id} value={item._id}>
-                  {item.name}
-                </option>
-              ))}
-          </select>
+return (
+  <div className="flex min-h-screen bg-gray-100">
+    <Navbar />
 
-          <select
-            value={guest}
-            onChange={(e) => setGuest(e.target.value)}
-            className="w-[81%] bg-white border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
-          >
-            {[...Array(6)].map((_, i) => (
-              <option key={i} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-          </select>
+    <div className="flex flex-col flex-1 p-10">
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">Update Your Post</h1>
 
-          <select
-            value={isAvailable}
-            onChange={(e) =>
-              setIsAvailable(e.target.value === "true" ? true : false)
-            }
-            className="w-[81%] bg-white border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500"
-          >
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
-          </select>
+      <form onSubmit={handleSubmit} className="space-y-4 max-w-4xl">
+        {/* Title */}
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          required
+        />
 
-          <div className="w-[81%] p-3 border border-gray-300 rounded">
-            <label className="flex items-center cursor-pointer">
-              <FaImage className="mr-2 text-gray-600" />
-              <span>Upload Images (max 3)</span>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageChange}
-                className="hidden"
-              />
-            </label>
-            <div className="flex space-x-4 mt-2">
-              {images.length > 0 &&
-                images.map((image, index) => {
-                  // Render images from URLs if they are available
-                  const imageURL =
-                    typeof image === "string"
-                      ? image
-                      : URL.createObjectURL(image);
-                  return (
-                    <img
-                      key={index}
-                      src={imageURL}
-                      alt={`Preview ${index + 1}`}
-                      className="w-24 h-24 object-cover rounded"
-                    />
-                  );
-                })}
-            </div>
+        {/* Location */}
+        <input
+          type="text"
+          placeholder="Hotel Location"
+          value={hotelLocation}
+          onChange={(e) => setHotelLocation(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          required
+        />
+
+        {/* Description */}
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          required
+        />
+
+        {/* Facilities */}
+        <input
+          type="text"
+          placeholder="Facilities"
+          value={facilities}
+          onChange={(e) => setFacilities(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        />
+
+        {/* Price */}
+        <input
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+          required
+        />
+
+        {/* Near Area */}
+        <input
+          type="text"
+          placeholder="Nearby Area"
+          value={nearArea}
+          onChange={(e) => setNearArea(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        />
+
+        {/* Category */}
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        >
+          <option value="">Select a category</option>
+          {categories?.map((item) => (
+            <option key={item._id} value={item._id}>
+              {item.name}
+            </option>
+          ))}
+        </select>
+
+        {/* Guests */}
+        <select
+          value={guest}
+          onChange={(e) => setGuest(e.target.value)}
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        >
+          {[...Array(6)].map((_, i) => (
+            <option key={i} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+
+        {/* Availability */}
+        <select
+          value={isAvailable}
+          onChange={(e) =>
+            setIsAvailable(e.target.value === "true" ? true : false)
+          }
+          className="w-full p-3 border bg-white border-gray-300 rounded focus:outline-none focus:border-blue-500"
+        >
+          <option value={true}>Yes</option>
+          <option value={false}>No</option>
+        </select>
+
+        {/* Image Upload */}
+        <div className="w-full p-3 border border-gray-300 rounded bg-white">
+          <label className="flex items-center cursor-pointer">
+            <FaImage className="mr-2 text-gray-600" />
+            <span>Upload Images (max 3)</span>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageChange}
+              className="hidden"
+            />
+          </label>
+
+          <div className="flex space-x-4 mt-2">
+            {images.length > 0 &&
+              images.map((image, index) => {
+                const imageURL =
+                  typeof image === "string"
+                    ? image
+                    : URL.createObjectURL(image);
+                return (
+                  <img
+                    key={index}
+                    src={imageURL}
+                    alt={`Preview ${index + 1}`}
+                    className="w-24 h-24 object-cover rounded"
+                  />
+                );
+              })}
           </div>
+        </div>
 
-          <button
-            type="submit"
-            className="w-[81%] bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition duration-300"
-          >
-            Submit Post
-          </button>
-        </form>
-      </div>
+        {/* Submit */}
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition duration-300"
+        >
+          Submit Post
+        </button>
+      </form>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default UpdatePost;
