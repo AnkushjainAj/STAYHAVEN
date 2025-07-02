@@ -28,7 +28,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Sidebar */}
+   
       <div
         className={`bg-gray-800 text-white w-[15rem] md:block min-h-screen border-r border-gray-700 shadow-md 
         ${isOpen ? "block" : "hidden"} md:relative fixed z-40 md:z-auto`}
